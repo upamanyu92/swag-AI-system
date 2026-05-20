@@ -88,7 +88,7 @@ Execution layer must enforce:
 
 - Static IP and broker/exchange policy controls.
 - Immutable order/audit trail.
-- Order-rate throttling (including hard OPS safeguards).
+- Order-rate throttling (including hard orders-per-second safeguards).
 - Pre-trade risk checks before every live order.
 - Policy-level penalties for attempted non-compliant actions.
 
@@ -105,5 +105,5 @@ Execution layer must enforce:
 ## References
 
 1. CFA Institute Research (RL in investment management)
-2. FinRL framework literature (Columbia/OpenFin)
+2. FinRL framework literature (Columbia University)
 3. CrewAI documentation
