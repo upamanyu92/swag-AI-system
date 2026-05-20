@@ -27,6 +27,14 @@ Build an always-online, zero-prompt trading agent that:
 
 ### 2) Event-driven data and execution topology
 
+| Component | Technology | Primary Function in Trading System |
+| -- | -- | -- |
+| API Gateway | FastAPI / Nginx | Serves as the single entry point, managing SSE connections for streaming live price updates and routing traffic to backend services. |
+| Order Management System (OMS) | Python Microservice | Validates incoming orders against margin limits, executes routing logic, and publishes order states (placed, executed) to Kafka. |
+| Kafka Event Stream | Apache Kafka | Acts as the durable backbone, decoupling ingestion from analytics. Real-time tick data, order executions, and sentiment scores are published to partitioned topics, ensuring fault tolerance. |
+| Message Broker | Redis Pub/Sub | Handles transient live data that does not require durable storage, broadcasting sub-millisecond price updates to the user dashboard. |
+| Exchange Gateway Processor | WebSocket Clients | Translates internal normalized order formats into broker-specific payloads (e.g., Zerodha, FYERS) and maintains persistent market feeds. |
+
 - **API Gateway (FastAPI/Nginx):** single ingress; streams live updates to clients (SSE/WebSocket).
 - **Kafka:** durable event backbone for ticks, order states, sentiment scores, model outputs.
 - **Redis Pub/Sub:** ultra-low-latency fanout for dashboard state changes.
